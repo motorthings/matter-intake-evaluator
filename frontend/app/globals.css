@@ -3,34 +3,32 @@
 @theme {
   --font-sans: 'Fraunces', Georgia, serif;
   --font-mono: 'Source Code Pro', 'SF Mono', Consolas, monospace;
-}
 
-:root {
-  /* Navy primary — legal/professional */
-  --color-primary-50: #eff4fb;
-  --color-primary-100: #dbe5f5;
-  --color-primary-200: #bdd0ed;
-  --color-primary-300: #8eafe0;
-  --color-primary-400: #5e8bcf;
-  --color-primary-500: #3b6cbe;
-  --color-primary-600: #2d54a3;
-  --color-primary-700: #264484;
-  --color-primary-800: #233a6d;
-  --color-primary-900: #22335c;
-  --color-primary-950: #16203d;
+  /* Mercedes-AMG Petronas F1 — Petronas teal primary */
+  --color-primary-50: #e6faf8;
+  --color-primary-100: #b3f2ec;
+  --color-primary-200: #80e9e0;
+  --color-primary-300: #4ddfd3;
+  --color-primary-400: #1ad4c6;
+  --color-primary-500: #00d2be;
+  --color-primary-600: #00b8a6;
+  --color-primary-700: #009e8e;
+  --color-primary-800: #008476;
+  --color-primary-900: #006a5e;
+  --color-primary-950: #005046;
 
-  /* Gold accent — prestige */
-  --color-accent-50: #fefce8;
-  --color-accent-100: #fef9c3;
-  --color-accent-200: #fef08a;
-  --color-accent-300: #fde047;
-  --color-accent-400: #facc15;
-  --color-accent-500: #eab308;
-  --color-accent-600: #ca8a04;
-  --color-accent-700: #a16207;
-  --color-accent-800: #854d0e;
-  --color-accent-900: #713f12;
-  --color-accent-950: #422006;
+  /* Silver/ice accent */
+  --color-accent-50: #f5f7fa;
+  --color-accent-100: #e4e8ef;
+  --color-accent-200: #c8d0da;
+  --color-accent-300: #a8b4c4;
+  --color-accent-400: #8c9aad;
+  --color-accent-500: #6b7d94;
+  --color-accent-600: #55667a;
+  --color-accent-700: #434f60;
+  --color-accent-800: #313a48;
+  --color-accent-900: #1f2530;
+  --color-accent-950: #141820;
 }
 
 html {
@@ -38,16 +36,14 @@ html {
 }
 
 body {
-  background: #f8fafc;
-  color: #0f172a;
+  background: #0a0e14;
+  background-image:
+    radial-gradient(ellipse at 20% 0%, rgba(0, 210, 190, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(0, 210, 190, 0.06) 0%, transparent 40%);
+  color: #e4e8ef;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #0b1121;
-    background-image:
-      radial-gradient(at 25% 15%, rgba(45, 84, 163, 0.15) 0%, transparent 50%),
-      radial-gradient(at 75% 85%, rgba(202, 138, 4, 0.10) 0%, transparent 50%);
-    color: #e2e8f0;
-  }
+::selection {
+  background: rgba(0, 210, 190, 0.3);
+  color: #fff;
 }

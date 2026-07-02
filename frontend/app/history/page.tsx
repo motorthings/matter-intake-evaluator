@@ -45,9 +45,9 @@ interface AuditTrail {
 }
 
 function riskColor(level: string) {
-  if (level === "high") return "text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/30";
-  if (level === "medium") return "text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30";
-  return "text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/30";
+  if (level === "high") return "text-red-400 bg-red-950/30";
+  if (level === "medium") return "text-amber-400 bg-amber-950/30";
+  return "text-emerald-400 bg-emerald-950/30";
 }
 
 export default function HistoryPage() {
@@ -97,10 +97,10 @@ export default function HistoryPage() {
   return (
     <div>
       <header className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-[#e2e8f0] tracking-tight">
+        <h1 className="text-2xl font-bold text-[#e4e8ef] tracking-tight">
           Evaluation History
         </h1>
-        <p className="text-gray-500 dark:text-[#94a3b8] mt-1 text-sm">
+        <p className="text-[#8c9aad] mt-1 text-sm">
           Previous matter intake evaluations with full audit trails.
         </p>
       </header>
@@ -112,40 +112,40 @@ export default function HistoryPage() {
       )}
 
       {evaluations.length === 0 ? (
-        <div className="bg-white dark:bg-[#111827] rounded-xl border border-gray-200 dark:border-white/6 p-6 text-center py-16">
+        <div className="bg-[#111820] rounded-xl border border-white/6 p-6 text-center py-16">
           <FileSearch className="w-12 h-12 text-gray-300 dark:text-[#1e293b] mx-auto mb-4" />
-          <p className="text-gray-500 dark:text-[#94a3b8]">No evaluations yet.</p>
+          <p className="text-[#8c9aad]">No evaluations yet.</p>
         </div>
       ) : (
-        <div className="bg-white dark:bg-[#111827] rounded-xl border border-gray-200 dark:border-white/6 overflow-hidden">
+        <div className="bg-[#111820] rounded-xl border border-white/6 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-gray-200 dark:border-white/6">
-                  <th className="text-left px-6 py-3 text-xs font-medium text-gray-500 dark:text-[#94a3b8] uppercase">Date</th>
-                  <th className="text-left px-6 py-3 text-xs font-medium text-gray-500 dark:text-[#94a3b8] uppercase">Practice Area</th>
-                  <th className="text-left px-6 py-3 text-xs font-medium text-gray-500 dark:text-[#94a3b8] uppercase">Score</th>
-                  <th className="text-left px-6 py-3 text-xs font-medium text-gray-500 dark:text-[#94a3b8] uppercase">Risk</th>
-                  <th className="text-left px-6 py-3 text-xs font-medium text-gray-500 dark:text-[#94a3b8] uppercase">Staffing</th>
-                  <th className="text-left px-6 py-3 text-xs font-medium text-gray-500 dark:text-[#94a3b8] uppercase">Audit</th>
+                <tr className="border-b border-white/6">
+                  <th className="text-left px-6 py-3 text-xs font-medium text-[#8c9aad] uppercase">Date</th>
+                  <th className="text-left px-6 py-3 text-xs font-medium text-[#8c9aad] uppercase">Practice Area</th>
+                  <th className="text-left px-6 py-3 text-xs font-medium text-[#8c9aad] uppercase">Score</th>
+                  <th className="text-left px-6 py-3 text-xs font-medium text-[#8c9aad] uppercase">Risk</th>
+                  <th className="text-left px-6 py-3 text-xs font-medium text-[#8c9aad] uppercase">Staffing</th>
+                  <th className="text-left px-6 py-3 text-xs font-medium text-[#8c9aad] uppercase">Audit</th>
                 </tr>
               </thead>
               <tbody>
                 {evaluations.map((ev) => (
                   <tr
                     key={ev.id}
-                    className="border-b border-gray-50 dark:border-white/6 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors"
+                    className="border-b border-white/6 hover:bg-white/5 transition-colors"
                   >
-                    <td className="px-6 py-3 text-sm text-gray-500 dark:text-[#94a3b8] whitespace-nowrap">
+                    <td className="px-6 py-3 text-sm text-[#8c9aad] whitespace-nowrap">
                       <div className="flex items-center gap-1.5">
                         <Clock className="w-3.5 h-3.5" />
                         {new Date(ev.created_at).toLocaleDateString()}
                       </div>
                     </td>
-                    <td className="px-6 py-3 text-sm text-gray-900 dark:text-[#e2e8f0]">
+                    <td className="px-6 py-3 text-sm text-[#e4e8ef]">
                       {ev.practice_area}
                     </td>
-                    <td className="px-6 py-3 text-sm font-semibold text-gray-900 dark:text-[#e2e8f0]">
+                    <td className="px-6 py-3 text-sm font-semibold text-[#e4e8ef]">
                       {ev.overall_score}/100
                     </td>
                     <td className="px-6 py-3">
@@ -153,7 +153,7 @@ export default function HistoryPage() {
                         {ev.overall_risk_level}
                       </span>
                     </td>
-                    <td className="px-6 py-3 text-sm text-gray-500 dark:text-[#94a3b8] max-w-[200px] truncate">
+                    <td className="px-6 py-3 text-sm text-[#8c9aad] max-w-[200px] truncate">
                       {ev.recommended_role}
                     </td>
                     <td className="px-6 py-3">
@@ -178,9 +178,9 @@ export default function HistoryPage() {
       {auditOpen !== null && (
         <div className="fixed inset-0 z-50 flex justify-end">
           <div className="absolute inset-0 bg-black/50" onClick={() => setAuditOpen(null)} />
-          <div className="relative w-full max-w-2xl bg-white dark:bg-[#111827] h-full overflow-y-auto shadow-xl border-l border-gray-200 dark:border-white/6">
-            <div className="sticky top-0 bg-white dark:bg-[#111827] border-b border-gray-200 dark:border-white/6 p-4 flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-[#e2e8f0]">
+          <div className="relative w-full max-w-2xl bg-[#111820] h-full overflow-y-auto shadow-xl border-l border-white/6">
+            <div className="sticky top-0 bg-[#111820] border-b border-white/6 p-4 flex items-center justify-between">
+              <h2 className="text-lg font-semibold text-[#e4e8ef]">
                 Audit Trail
               </h2>
               <button
@@ -209,16 +209,16 @@ export default function HistoryPage() {
                   {auditData.audit_trail.pipeline_stages.map((stage) => {
                     const isExpanded = expandedStages[stage.stage] || false;
                     return (
-                      <div key={stage.stage} className="border border-gray-200 dark:border-white/6 rounded-lg overflow-hidden">
+                      <div key={stage.stage} className="border border-white/6 rounded-lg overflow-hidden">
                         <button
                           onClick={() => setExpandedStages((prev) => ({ ...prev, [stage.stage]: !isExpanded }))}
-                          className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 dark:hover:bg-white/5 transition-colors"
+                          className="w-full flex items-center justify-between p-4 text-left hover:bg-white/5 transition-colors"
                         >
                           <div>
-                            <div className="text-sm font-medium text-gray-900 dark:text-[#e2e8f0]">
+                            <div className="text-sm font-medium text-[#e4e8ef]">
                               Stage {stage.stage.replace("_", " ")}: {stage.description}
                             </div>
-                            <div className="text-xs text-gray-500 dark:text-[#94a3b8] mt-1">
+                            <div className="text-xs text-[#8c9aad] mt-1">
                               {stage.key_decisions.map((d, i) => (
                                 <div key={i}>{d}</div>
                               ))}
@@ -231,16 +231,16 @@ export default function HistoryPage() {
                           )}
                         </button>
                         {isExpanded && (
-                          <div className="border-t border-gray-200 dark:border-white/6 p-4 space-y-4 bg-gray-50/50 dark:bg-[#1a2236]/50">
+                          <div className="border-t border-white/6 p-4 space-y-4 bg-gray-50/50 dark:bg-[#1a2236]/50">
                             <div>
-                              <div className="text-xs font-medium text-gray-500 dark:text-[#94a3b8] mb-1 uppercase">Input (Raw Prompt)</div>
-                              <pre className="text-xs text-gray-700 dark:text-[#cbd5e1] whitespace-pre-wrap font-mono bg-white dark:bg-[#111827] rounded p-3 border border-gray-200 dark:border-white/6 max-h-48 overflow-y-auto">
+                              <div className="text-xs font-medium text-[#8c9aad] mb-1 uppercase">Input (Raw Prompt)</div>
+                              <pre className="text-xs text-gray-700 dark:text-[#cbd5e1] whitespace-pre-wrap font-mono bg-[#111820] rounded p-3 border border-white/6 max-h-48 overflow-y-auto">
                                 {stage.input}
                               </pre>
                             </div>
                             <div>
-                              <div className="text-xs font-medium text-gray-500 dark:text-[#94a3b8] mb-1 uppercase">Output (Raw Response)</div>
-                              <pre className="text-xs text-gray-700 dark:text-[#cbd5e1] whitespace-pre-wrap font-mono bg-white dark:bg-[#111827] rounded p-3 border border-gray-200 dark:border-white/6 max-h-48 overflow-y-auto">
+                              <div className="text-xs font-medium text-[#8c9aad] mb-1 uppercase">Output (Raw Response)</div>
+                              <pre className="text-xs text-gray-700 dark:text-[#cbd5e1] whitespace-pre-wrap font-mono bg-[#111820] rounded p-3 border border-white/6 max-h-48 overflow-y-auto">
                                 {stage.output}
                               </pre>
                             </div>
@@ -252,18 +252,18 @@ export default function HistoryPage() {
 
                   {/* Rubrics used */}
                   {auditData.rubrics && Object.keys(auditData.rubrics).length > 0 && (
-                    <div className="border border-gray-200 dark:border-white/6 rounded-lg p-4">
-                      <div className="text-sm font-medium text-gray-900 dark:text-[#e2e8f0] mb-3">
+                    <div className="border border-white/6 rounded-lg p-4">
+                      <div className="text-sm font-medium text-[#e4e8ef] mb-3">
                         Rubrics Used (version snapshot)
                       </div>
-                      <pre className="text-xs text-gray-700 dark:text-[#cbd5e1] whitespace-pre-wrap font-mono bg-gray-50 dark:bg-[#1a2236] rounded p-3 max-h-64 overflow-y-auto">
+                      <pre className="text-xs text-gray-700 dark:text-[#cbd5e1] whitespace-pre-wrap font-mono bg-[#1a2230] rounded p-3 max-h-64 overflow-y-auto">
                         {JSON.stringify(auditData.rubrics, null, 2)}
                       </pre>
                     </div>
                   )}
                 </div>
               ) : (
-                <p className="text-sm text-gray-500 dark:text-[#94a3b8]">Failed to load audit trail.</p>
+                <p className="text-sm text-[#8c9aad]">Failed to load audit trail.</p>
               )}
             </div>
           </div>

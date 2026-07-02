@@ -75,38 +75,38 @@ export default function SettingsPage() {
   return (
     <div>
       <header className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-[#e2e8f0] tracking-tight">
+        <h1 className="text-2xl font-bold text-[#e4e8ef] tracking-tight">
           Settings
         </h1>
-        <p className="text-gray-500 dark:text-[#94a3b8] mt-1 text-sm">
+        <p className="text-[#8c9aad] mt-1 text-sm">
           Configure teams, evaluation rubrics, and categories.
         </p>
       </header>
 
       <div className="space-y-6">
         {/* API Configuration */}
-        <section className="bg-white dark:bg-[#111827] rounded-xl border border-gray-200 dark:border-white/6 p-6">
+        <section className="bg-[#111820] rounded-xl border border-white/6 p-6">
           <div className="flex items-center gap-2 mb-4">
             <Key className="w-4 h-4 text-primary-600 dark:text-primary-400" />
-            <h2 className="text-sm font-semibold text-gray-900 dark:text-[#e2e8f0]">
+            <h2 className="text-sm font-semibold text-[#e4e8ef]">
               API Configuration
             </h2>
           </div>
-          <p className="text-xs text-gray-500 dark:text-[#94a3b8] leading-relaxed">
+          <p className="text-xs text-[#8c9aad] leading-relaxed">
             The LLM provider and model are configured via environment variables on the server.
-            Set <code className="bg-gray-100 dark:bg-[#1a2236] px-1 rounded">LLM_API_KEY</code> for
+            Set <code className="bg-[#1a2230] px-1 rounded">LLM_API_KEY</code> for
             DeepSeek or Anthropic (auto-detected by key prefix). Override model with{" "}
-            <code className="bg-gray-100 dark:bg-[#1a2236] px-1 rounded">ROUTER_MODEL</code> and{" "}
-            <code className="bg-gray-100 dark:bg-[#1a2236] px-1 rounded">EVALUATOR_MODEL</code>.
+            <code className="bg-[#1a2230] px-1 rounded">ROUTER_MODEL</code> and{" "}
+            <code className="bg-[#1a2230] px-1 rounded">EVALUATOR_MODEL</code>.
           </p>
         </section>
 
         {/* Teams */}
-        <section className="bg-white dark:bg-[#111827] rounded-xl border border-gray-200 dark:border-white/6 p-6">
+        <section className="bg-[#111820] rounded-xl border border-white/6 p-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <Users className="w-4 h-4 text-primary-600 dark:text-primary-400" />
-              <h2 className="text-sm font-semibold text-gray-900 dark:text-[#e2e8f0]">
+              <h2 className="text-sm font-semibold text-[#e4e8ef]">
                 Staffing Teams
               </h2>
             </div>
@@ -120,7 +120,7 @@ export default function SettingsPage() {
           </div>
           <div className="space-y-3">
             {teams.map((team, ti) => (
-              <div key={ti} className="border border-gray-200 dark:border-white/6 rounded-lg p-4">
+              <div key={ti} className="border border-white/6 rounded-lg p-4">
                 <input
                   value={team.name}
                   onChange={(e) => {
@@ -128,7 +128,7 @@ export default function SettingsPage() {
                     updated[ti] = { ...team, name: e.target.value };
                     setTeams(updated);
                   }}
-                  className="w-full px-3 py-1.5 text-sm font-medium bg-gray-50 dark:bg-[#1a2236] border border-gray-200 dark:border-white/10 rounded-md text-gray-900 dark:text-[#e2e8f0] mb-2"
+                  className="w-full px-3 py-1.5 text-sm font-medium bg-[#0d1117] border border-gray-200 dark:border-white/10 rounded-md text-[#e4e8ef] mb-2"
                 />
                 <div className="flex flex-wrap gap-2">
                   {team.roles.map((role, ri) => (
@@ -143,11 +143,11 @@ export default function SettingsPage() {
         </section>
 
         {/* Rubrics */}
-        <section className="bg-white dark:bg-[#111827] rounded-xl border border-gray-200 dark:border-white/6 p-6">
+        <section className="bg-[#111820] rounded-xl border border-white/6 p-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <BookOpen className="w-4 h-4 text-primary-600 dark:text-primary-400" />
-              <h2 className="text-sm font-semibold text-gray-900 dark:text-[#e2e8f0]">
+              <h2 className="text-sm font-semibold text-[#e4e8ef]">
                 Evaluation Rubrics
               </h2>
             </div>
@@ -162,28 +162,28 @@ export default function SettingsPage() {
 
           {/* Practice areas */}
           <div className="mb-4">
-            <h3 className="text-xs font-medium text-gray-500 dark:text-[#94a3b8] uppercase mb-2">Practice Areas</h3>
+            <h3 className="text-xs font-medium text-[#8c9aad] uppercase mb-2">Practice Areas</h3>
             <textarea
               value={rubrics.practice_areas.join("\n")}
               onChange={(e) => setRubrics({ ...rubrics, practice_areas: e.target.value.split("\n").filter(Boolean) })}
               rows={6}
-              className="w-full rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-[#1a2236] px-3 py-2 text-sm text-gray-900 dark:text-[#e2e8f0] font-mono resize-y"
+              className="w-full rounded-lg border border-gray-200 dark:border-white/10 bg-[#0d1117] px-3 py-2 text-sm text-[#e4e8ef] font-mono resize-y"
             />
           </div>
 
           {/* Urgency criteria */}
           <div className="mb-4">
-            <h3 className="text-xs font-medium text-gray-500 dark:text-[#94a3b8] uppercase mb-2">Urgency Criteria</h3>
+            <h3 className="text-xs font-medium text-[#8c9aad] uppercase mb-2">Urgency Criteria</h3>
             {Object.entries(rubrics.urgency_criteria).map(([key, val]) => (
               <div key={key} className="flex items-start gap-3 mb-2">
-                <span className="text-xs font-medium text-gray-900 dark:text-[#e2e8f0] w-24 flex-shrink-0 pt-2">{key}</span>
+                <span className="text-xs font-medium text-[#e4e8ef] w-24 flex-shrink-0 pt-2">{key}</span>
                 <input
                   value={val as string}
                   onChange={(e) => setRubrics({
                     ...rubrics,
                     urgency_criteria: { ...rubrics.urgency_criteria, [key]: e.target.value },
                   })}
-                  className="flex-1 px-3 py-1.5 text-sm bg-gray-50 dark:bg-[#1a2236] border border-gray-200 dark:border-white/10 rounded-md text-gray-900 dark:text-[#e2e8f0]"
+                  className="flex-1 px-3 py-1.5 text-sm bg-[#0d1117] border border-gray-200 dark:border-white/10 rounded-md text-[#e4e8ef]"
                 />
               </div>
             ))}
@@ -191,17 +191,17 @@ export default function SettingsPage() {
 
           {/* Conflict types */}
           <div className="mb-4">
-            <h3 className="text-xs font-medium text-gray-500 dark:text-[#94a3b8] uppercase mb-2">Conflict Types</h3>
+            <h3 className="text-xs font-medium text-[#8c9aad] uppercase mb-2">Conflict Types</h3>
             {Object.entries(rubrics.conflict_types).map(([key, val]) => (
               <div key={key} className="flex items-start gap-3 mb-2">
-                <span className="text-xs font-medium text-gray-900 dark:text-[#e2e8f0] w-32 flex-shrink-0 pt-2">{key}</span>
+                <span className="text-xs font-medium text-[#e4e8ef] w-32 flex-shrink-0 pt-2">{key}</span>
                 <input
                   value={val as string}
                   onChange={(e) => setRubrics({
                     ...rubrics,
                     conflict_types: { ...rubrics.conflict_types, [key]: e.target.value },
                   })}
-                  className="flex-1 px-3 py-1.5 text-sm bg-gray-50 dark:bg-[#1a2236] border border-gray-200 dark:border-white/10 rounded-md text-gray-900 dark:text-[#e2e8f0]"
+                  className="flex-1 px-3 py-1.5 text-sm bg-[#0d1117] border border-gray-200 dark:border-white/10 rounded-md text-[#e4e8ef]"
                 />
               </div>
             ))}
@@ -209,12 +209,12 @@ export default function SettingsPage() {
 
           {/* Data integrity dimensions */}
           <div>
-            <h3 className="text-xs font-medium text-gray-500 dark:text-[#94a3b8] uppercase mb-2">Data Integrity Dimensions</h3>
+            <h3 className="text-xs font-medium text-[#8c9aad] uppercase mb-2">Data Integrity Dimensions</h3>
             <textarea
               value={rubrics.data_integrity_dimensions.join("\n")}
               onChange={(e) => setRubrics({ ...rubrics, data_integrity_dimensions: e.target.value.split("\n").filter(Boolean) })}
               rows={4}
-              className="w-full rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-[#1a2236] px-3 py-2 text-sm text-gray-900 dark:text-[#e2e8f0] font-mono resize-y"
+              className="w-full rounded-lg border border-gray-200 dark:border-white/10 bg-[#0d1117] px-3 py-2 text-sm text-[#e4e8ef] font-mono resize-y"
             />
           </div>
         </section>

@@ -47,3 +47,4 @@ htmlcov/
 *.tmp
 *.bak
 evaluations.db
+.vercel

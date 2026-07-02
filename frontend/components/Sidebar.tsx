@@ -19,18 +19,18 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 flex flex-col h-screen sticky top-0 bg-white dark:bg-[#111827] border-r border-gray-200 dark:border-white/6">
+    <aside className="w-64 flex flex-col h-screen sticky top-0 bg-[#111820] border-r border-white/6">
       {/* Logo */}
-      <div className="p-5 border-b border-gray-200 dark:border-white/6">
+      <div className="p-5 border-b border-white/6">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-lg bg-primary-600 dark:bg-primary-700 flex items-center justify-center">
-            <Scale className="w-5 h-5 text-white" />
+          <div className="w-9 h-9 rounded-lg bg-primary-500 flex items-center justify-center shadow-lg shadow-primary-500/20">
+            <Scale className="w-5 h-5 text-[#0a0e14]" />
           </div>
           <div>
-            <div className="text-sm font-semibold text-gray-900 dark:text-[#e2e8f0] leading-tight">
+            <div className="text-sm font-semibold text-[#e4e8ef] leading-tight">
               Matter Intake
             </div>
-            <div className="text-xs text-gray-500 dark:text-[#94a3b8]">
+            <div className="text-xs text-[#8c9aad]">
               Evaluation Platform
             </div>
           </div>
@@ -48,8 +48,8 @@ export default function Sidebar() {
               href={item.href}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 isActive
-                  ? "bg-primary-50 dark:bg-primary-950/50 text-primary-700 dark:text-primary-300"
-                  : "text-gray-600 dark:text-[#94a3b8] hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-[#e2e8f0]"
+                  ? "bg-primary-950/40 text-primary-300 border border-primary-500/20"
+                  : "text-[#8c9aad] hover:bg-white/5 hover:text-[#e4e8ef]"
               }`}
             >
               <Icon className="w-4.5 h-4.5" />
@@ -60,8 +60,8 @@ export default function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="p-4 border-t border-gray-200 dark:border-white/6">
-        <div className="text-xs text-gray-400 dark:text-[#64748b]">
+      <div className="p-4 border-t border-white/6">
+        <div className="text-xs text-[#55667a]">
           Perkins Coie · Demo
         </div>
       </div>
