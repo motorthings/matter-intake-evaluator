@@ -46,3 +46,4 @@ htmlcov/
 # Misc
 *.tmp
 *.bak
+evaluations.db
