@@ -1,59 +1,53 @@
 @import "tailwindcss";
 
-:root {
-  --color-bg: #f8f9fa;
-  --color-surface: #ffffff;
-  --color-primary: #1a56db;
-  --color-primary-hover: #1648c0;
-  --color-primary-light: #e8effd;
-  --color-text: #111827;
-  --color-text-secondary: #6b7280;
-  --color-text-muted: #9ca3af;
-  --color-border: #e5e7eb;
-  --color-border-focus: #1a56db;
-  --color-success: #059669;
-  --color-warning: #d97706;
-  --color-error: #dc2626;
+@theme {
+  --font-sans: 'Fraunces', Georgia, serif;
+  --font-mono: 'Source Code Pro', 'SF Mono', Consolas, monospace;
+}
 
-  --risk-high: #dc2626;
-  --risk-medium: #d97706;
-  --risk-low: #059669;
+:root {
+  /* Navy primary — legal/professional */
+  --color-primary-50: #eff4fb;
+  --color-primary-100: #dbe5f5;
+  --color-primary-200: #bdd0ed;
+  --color-primary-300: #8eafe0;
+  --color-primary-400: #5e8bcf;
+  --color-primary-500: #3b6cbe;
+  --color-primary-600: #2d54a3;
+  --color-primary-700: #264484;
+  --color-primary-800: #233a6d;
+  --color-primary-900: #22335c;
+  --color-primary-950: #16203d;
+
+  /* Gold accent — prestige */
+  --color-accent-50: #fefce8;
+  --color-accent-100: #fef9c3;
+  --color-accent-200: #fef08a;
+  --color-accent-300: #fde047;
+  --color-accent-400: #facc15;
+  --color-accent-500: #eab308;
+  --color-accent-600: #ca8a04;
+  --color-accent-700: #a16207;
+  --color-accent-800: #854d0e;
+  --color-accent-900: #713f12;
+  --color-accent-950: #422006;
+}
+
+html {
+  font-size: 17px;
 }
 
 body {
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  background: #f8fafc;
+  color: #0f172a;
 }
 
-/* Card */
-.card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-}
-
-/* Score bar */
-.score-bar {
-  height: 6px;
-  border-radius: 3px;
-  background: var(--color-border);
-  overflow: hidden;
-}
-.score-bar-fill {
-  height: 100%;
-  border-radius: 3px;
-  transition: width 0.5s ease;
-}
-
-/* Skeleton pulse */
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-.skeleton {
-  animation: pulse 1.5s ease-in-out infinite;
-  background: var(--color-border);
-  border-radius: 0.375rem;
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #0b1121;
+    background-image:
+      radial-gradient(at 25% 15%, rgba(45, 84, 163, 0.15) 0%, transparent 50%),
+      radial-gradient(at 75% 85%, rgba(202, 138, 4, 0.10) 0%, transparent 50%);
+    color: #e2e8f0;
+  }
 }

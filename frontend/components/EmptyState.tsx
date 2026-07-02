@@ -1,20 +1,24 @@
 const DIMENSIONS = [
-  { name: "Practice Area Classification", weight: "25%", icon: "⚖️" },
-  { name: "Urgency & Risk Assessment", weight: "25%", icon: "🔴" },
-  { name: "Conflict Check Completeness", weight: "20%", icon: "🔍" },
-  { name: "Staffing Recommendation", weight: "15%", icon: "👥" },
-  { name: "Data Integrity", weight: "15%", icon: "📋" },
+  { name: "Practice Area Classification", weight: "25%" },
+  { name: "Urgency & Risk Assessment", weight: "25%" },
+  { name: "Conflict Check Completeness", weight: "20%" },
+  { name: "Staffing Recommendation", weight: "15%" },
+  { name: "Data Integrity", weight: "15%" },
 ];
 
 export default function EmptyState() {
   return (
-    <div className="card text-center py-12">
-      <div className="text-4xl mb-4">📄</div>
-      <h3 className="text-lg font-semibold text-[var(--color-text)] mb-2">
+    <div className="bg-white dark:bg-[#111827] rounded-xl border border-gray-200 dark:border-white/6 p-6 text-center py-16">
+      <div className="w-12 h-12 rounded-xl bg-primary-50 dark:bg-primary-950/30 flex items-center justify-center mx-auto mb-4">
+        <svg className="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9zm3.75 11.625a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+        </svg>
+      </div>
+      <h3 className="text-lg font-semibold text-gray-900 dark:text-[#e2e8f0] mb-2">
         Ready to evaluate
       </h3>
-      <p className="text-sm text-[var(--color-text-secondary)] mb-8 max-w-md mx-auto">
-        Paste a matter summary above and the AI will evaluate it across five
+      <p className="text-sm text-gray-500 dark:text-[#94a3b8] mb-8 max-w-md mx-auto">
+        Paste a matter summary above and the system will evaluate it across five
         dimensions used in law firm intake assessment.
       </p>
 
@@ -22,14 +26,13 @@ export default function EmptyState() {
         {DIMENSIONS.map((d) => (
           <div
             key={d.name}
-            className="p-3 rounded-lg bg-[var(--color-bg)] border border-[var(--color-border)]"
+            className="p-3 rounded-lg bg-gray-50 dark:bg-[#1a2236] border border-gray-200 dark:border-white/6"
           >
-            <div className="text-lg mb-1">{d.icon}</div>
-            <div className="text-xs font-medium text-[var(--color-text)] leading-tight">
+            <div className="text-xs font-medium text-gray-900 dark:text-[#e2e8f0] leading-tight">
               {d.name}
             </div>
-            <div className="text-xs text-[var(--color-text-muted)] mt-0.5">
-              {d.weight}
+            <div className="text-xs text-gray-400 dark:text-[#64748b] mt-0.5">
+              Weight: {d.weight}
             </div>
           </div>
         ))}

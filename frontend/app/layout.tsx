@@ -1,22 +1,38 @@
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
+import { Fraunces, Source_Code_Pro } from "next/font/google";
 import "./globals.css";
+import Sidebar from "@/components/Sidebar";
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+const sourceCodePro = Source_Code_Pro({
+  subsets: ["latin"],
+  variable: "--font-source-code-pro",
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Matter Intake Evaluator | Perkins Coie",
-  description:
-    "AI-powered legal matter intake evaluation for Perkins Coie — classify, assess risk, check conflicts, and recommend staffing.",
+  title: "Document Matter Intake Evaluation",
+  description: "AI-powered legal matter intake evaluation — classify, assess risk, check conflicts, and recommend staffing.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={`${GeistSans.variable} font-sans antialiased`}>
-        {children}
+    <html lang="en" className={`${fraunces.variable} ${sourceCodePro.variable}`}>
+      <body className="font-sans antialiased">
+        <div className="flex min-h-screen">
+          <Sidebar />
+          <main className="flex-1 overflow-y-auto">
+            <div className="max-w-4xl mx-auto p-8">
+              {children}
+            </div>
+          </main>
+        </div>
       </body>
     </html>
   );

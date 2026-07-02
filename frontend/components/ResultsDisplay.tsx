@@ -3,6 +3,7 @@ import RiskBadge from "./RiskBadge";
 import ScoreCard from "./ScoreCard";
 import ConflictFlags from "./ConflictFlags";
 import StaffingRecommendation from "./StaffingRecommendation";
+import { RefreshCw } from "lucide-react";
 
 interface ResultsDisplayProps {
   data: EvaluateResponse;
@@ -10,24 +11,23 @@ interface ResultsDisplayProps {
 }
 
 function scoreColor(score: number): string {
-  if (score >= 70) return "var(--color-success)";
-  if (score >= 40) return "var(--color-warning)";
-  return "var(--color-error)";
+  if (score >= 70) return "#059669";
+  if (score >= 40) return "#d97706";
+  return "#dc2626";
 }
 
 export default function ResultsDisplay({ data, onReset }: ResultsDisplayProps) {
   return (
     <div>
       {/* Overall header */}
-      <div className="card mb-6">
+      <div className="bg-white dark:bg-[#111827] rounded-xl border border-gray-200 dark:border-white/6 p-6 mb-6">
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div>
-            <h2 className="text-lg font-semibold text-[var(--color-text)]">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-[#e2e8f0]">
               Evaluation Results
             </h2>
-            <p className="text-xs text-[var(--color-text-muted)] mt-1">
-              {data.processing_time_ms.toLocaleString()}ms ·{" "}
-              {data.model_used}
+            <p className="text-xs text-gray-400 dark:text-[#64748b] mt-1">
+              {data.processing_time_ms.toLocaleString()}ms · {data.model_used}
             </p>
           </div>
           <RiskBadge level={data.overall_risk_level} score={data.overall_score} />
@@ -48,7 +48,7 @@ export default function ResultsDisplay({ data, onReset }: ResultsDisplayProps) {
         ))}
       </div>
 
-      {/* Side-by-side: conflict + staffing */}
+      {/* Conflict + Staffing */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         <ConflictFlags conflict={data.conflict_check} />
         <StaffingRecommendation staffing={data.staffing} />
@@ -58,8 +58,9 @@ export default function ResultsDisplay({ data, onReset }: ResultsDisplayProps) {
       <div className="text-center">
         <button
           onClick={onReset}
-          className="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-[var(--color-primary)] bg-[var(--color-primary-light)] hover:bg-[var(--color-primary-light)]/80 transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-primary-700 dark:text-primary-300 bg-primary-50 dark:bg-primary-950/30 hover:bg-primary-100 dark:hover:bg-primary-950/50 transition-colors"
         >
+          <RefreshCw className="w-4 h-4" />
           Evaluate Another Matter
         </button>
       </div>
