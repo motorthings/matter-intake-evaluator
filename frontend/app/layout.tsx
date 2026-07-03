@@ -19,6 +19,9 @@ const sourceCodePro = Source_Code_Pro({
 export const metadata: Metadata = {
   title: "Document Matter Intake Evaluation",
   description: "AI-powered legal matter intake evaluation — classify, assess risk, check conflicts, and recommend staffing.",
+  icons: {
+    icon: "/scales.svg",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

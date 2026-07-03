@@ -62,7 +62,7 @@ export default function Sidebar() {
       {/* Footer */}
       <div className="p-4 border-t border-white/6">
         <div className="text-xs text-[#55667a]">
-          Perkins Coie · Demo
+          Ashurst Perkins Coie &mdash; Demo
         </div>
       </div>
     </aside>
