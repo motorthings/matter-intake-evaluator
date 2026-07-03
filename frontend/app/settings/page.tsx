@@ -44,8 +44,29 @@ export default function SettingsPage() {
   const [teams, setTeams] = useState(DEFAULT_TEAMS);
   const [rubrics, setRubrics] = useState(DEFAULT_RUBRICS);
   const [saved, setSaved] = useState<string | null>(null);
-  const [teamsExpanded, setTeamsExpanded] = useState(true);
-  const [rubricsExpanded, setRubricsExpanded] = useState(true);
+  const [teamsExpanded, setTeamsExpanded] = useState(() => {
+    if (typeof window !== "undefined") {
+      const stored = sessionStorage.getItem("settings_teamsExpanded");
+      return stored !== null ? stored === "true" : true;
+    }
+    return true;
+  });
+  const [rubricsExpanded, setRubricsExpanded] = useState(() => {
+    if (typeof window !== "undefined") {
+      const stored = sessionStorage.getItem("settings_rubricsExpanded");
+      return stored !== null ? stored === "true" : true;
+    }
+    return true;
+  });
+
+  const toggleTeamsExpanded = (v: boolean) => {
+    setTeamsExpanded(v);
+    sessionStorage.setItem("settings_teamsExpanded", String(v));
+  };
+  const toggleRubricsExpanded = (v: boolean) => {
+    setRubricsExpanded(v);
+    sessionStorage.setItem("settings_rubricsExpanded", String(v));
+  };
   // Track which team's role input is active
   const [newRoleInput, setNewRoleInput] = useState<Record<number, string>>({});
 
@@ -137,7 +158,7 @@ export default function SettingsPage() {
         {/* Teams — expandable */}
         <section className="bg-[#111820] rounded-xl border border-white/6 overflow-hidden">
           <button
-            onClick={() => setTeamsExpanded(!teamsExpanded)}
+            onClick={() => toggleTeamsExpanded(!teamsExpanded)}
             className="w-full flex items-center justify-between p-6 text-left hover:bg-white/[0.02] transition-colors"
           >
             <div className="flex items-center gap-2">
@@ -246,7 +267,7 @@ export default function SettingsPage() {
         {/* Rubrics — expandable */}
         <section className="bg-[#111820] rounded-xl border border-white/6 overflow-hidden">
           <button
-            onClick={() => setRubricsExpanded(!rubricsExpanded)}
+            onClick={() => toggleRubricsExpanded(!rubricsExpanded)}
             className="w-full flex items-center justify-between p-6 text-left hover:bg-white/[0.02] transition-colors"
           >
             <div className="flex items-center gap-2">

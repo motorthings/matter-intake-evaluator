@@ -51,7 +51,7 @@ export default function Sidebar() {
               href={item.href}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 isActive
-                  ? "bg-primary-950/40 text-primary-300 border border-primary-500/20"
+                  ? "bg-primary-500/10 text-primary-400 border border-primary-500/30 ring-1 ring-primary-500/10"
                   : "text-[#8c9aad] hover:bg-white/5 hover:text-[#e4e8ef]"
               }`}
             >
