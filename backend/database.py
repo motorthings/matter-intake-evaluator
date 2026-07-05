@@ -164,10 +164,59 @@ async def save_evaluation(
     return row_id
 
 
-async def list_evaluations(limit: int = 20, offset: int = 0) -> list[dict]:
+async def list_evaluations(
+    limit: int = 20,
+    offset: int = 0,
+    search: str = "",
+    risk_level: str = "",
+    practice_area: str = "",
+    urgency_level: str = "",
+    sort_by: str = "created_at",
+    sort_order: str = "desc",
+) -> tuple[list[dict], int]:
+    """List evaluations with optional search, filter, and sort. Returns (rows, total_count)."""
     db = await get_db()
-    cursor = await db.execute(
-        """
+
+    # Build WHERE clauses
+    where_clauses: list[str] = []
+    params: list = []
+
+    if search:
+        where_clauses.append("(practice_area LIKE ? OR summary_preview LIKE ?)")
+        params.extend([f"%{search}%", f"%{search}%"])
+
+    if risk_level:
+        where_clauses.append("overall_risk_level = ?")
+        params.append(risk_level)
+
+    if practice_area:
+        where_clauses.append("practice_area = ?")
+        params.append(practice_area)
+
+    if urgency_level:
+        where_clauses.append("urgency_level = ?")
+        params.append(urgency_level)
+
+    where_sql = f"WHERE {' AND '.join(where_clauses)}" if where_clauses else ""
+
+    # Validate sort column to prevent injection
+    sort_columns = {
+        "created_at", "overall_score", "practice_area",
+        "overall_risk_level", "urgency_level",
+    }
+    if sort_by not in sort_columns:
+        sort_by = "created_at"
+    order = "DESC" if sort_order.lower() == "desc" else "ASC"
+
+    # Get total count
+    count_cursor = await db.execute(
+        f"SELECT COUNT(*) FROM evaluations {where_sql}",
+        params,
+    )
+    total = (await count_cursor.fetchone())[0]
+
+    # Fetch page
+    select_sql = f"""
         SELECT id, created_at, overall_score, overall_risk_level,
                practice_area, practice_area_confidence,
                urgency_level, risk_score, conflict_type, conflict_entity,
@@ -175,13 +224,21 @@ async def list_evaluations(limit: int = 20, offset: int = 0) -> list[dict]:
                completeness, clarity, summary_preview,
                processing_time_ms, model_used
         FROM evaluations
-        ORDER BY created_at DESC
+        {where_sql}
+        ORDER BY {sort_by} {order}
         LIMIT ? OFFSET ?
-        """,
-        (limit, offset),
+    """
+    cursor = await db.execute(select_sql, params + [limit, offset])
+    rows = await cursor.fetchall()
+    return [dict(row) for row in rows], total
+
+async def get_distinct_practice_areas() -> list[str]:
+    db = await get_db()
+    cursor = await db.execute(
+        "SELECT DISTINCT practice_area FROM evaluations ORDER BY practice_area"
     )
     rows = await cursor.fetchall()
-    return [dict(row) for row in rows]
+    return [row["practice_area"] for row in rows]
 
 
 async def get_evaluation(eval_id: int) -> dict | None:
@@ -208,7 +265,8 @@ async def get_audit_trail(eval_id: int) -> dict | None:
                matter_summary,
                router_raw_input, router_raw_output,
                evaluator_raw_input, evaluator_raw_output,
-               dimension_scores_json, full_response_json
+               dimension_scores_json, full_response_json,
+               rubrics_snapshot
         FROM evaluations WHERE id = ?
         """,
         (eval_id,),
@@ -254,8 +312,8 @@ async def get_audit_trail(eval_id: int) -> dict | None:
             {
                 "stage": "3_programmatic_scoring",
                 "description": "Weighted scoring — deterministic, not LLM-generated",
-                "input": "Evaluator output (stage 2)",
-                "output": d.get("dimension_scores", []),
+                "input": d.get("evaluator_raw_output", ""),
+                "output": d.get("dimension_scores_json", "[]"),
                 "key_decisions": [
                     f"Overall score: {d.get('overall_score', 0)}/100 ({d.get('overall_risk_level', 'N/A')} risk)",
                 ],

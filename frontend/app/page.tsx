@@ -30,10 +30,10 @@ export default function EvaluatePage() {
   return (
     <div>
       <header className="mb-8">
-        <h1 className="text-2xl font-bold text-[#e4e8ef] tracking-tight">
+        <h1 className="text-2xl font-bold text-[var(--text-primary)] tracking-tight">
           Document Matter Intake Evaluation
         </h1>
-        <p className="text-[#8c9aad] mt-1 text-sm leading-relaxed">
+        <p className="text-[var(--text-secondary)] mt-1 text-sm leading-relaxed">
           Paste a matter summary to receive AI-powered classification, conflict
           check, risk assessment, and staffing recommendations.
         </p>

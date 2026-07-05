@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fraunces, Source_Code_Pro } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -26,12 +27,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${sourceCodePro.variable}`}>
+    <html lang="en" className={`dark ${fraunces.variable} ${sourceCodePro.variable}`}>
       <body className="font-sans antialiased">
         <div className="flex min-h-screen">
           <Sidebar />
           <main className="flex-1 overflow-y-auto">
-            <div className="max-w-4xl mx-auto p-8">
+            <div className="max-w-7xl mx-auto p-6">
+              <ThemeToggle />
               {children}
             </div>
           </main>

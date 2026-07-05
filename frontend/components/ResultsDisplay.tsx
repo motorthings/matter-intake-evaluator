@@ -14,13 +14,13 @@ export default function ResultsDisplay({ data, onReset }: ResultsDisplayProps) {
   return (
     <div>
       {/* Overall header */}
-      <div className="bg-[#111820] rounded-xl border border-white/6 p-6 mb-6">
+      <div className="bg-[var(--bg-card)] rounded-xl border border-[var(--border-default)] p-6 mb-6">
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div>
-            <h2 className="text-lg font-semibold text-[#e4e8ef]">
+            <h2 className="text-lg font-semibold text-[var(--text-primary)]">
               Evaluation Results
             </h2>
-            <p className="text-xs text-[#55667a] mt-1 font-mono">
+            <p className="text-xs text-[var(--text-tertiary)] mt-1 font-mono">
               {data.processing_time_ms.toLocaleString()}ms · {data.model_used}
             </p>
           </div>
@@ -51,7 +51,7 @@ export default function ResultsDisplay({ data, onReset }: ResultsDisplayProps) {
       <div className="text-center">
         <button
           onClick={onReset}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-primary-300 bg-primary-950/30 hover:bg-primary-950/50 border border-primary-500/20 transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-primary-700 dark:text-primary-300 bg-primary-950/30 hover:bg-primary-950/50 border border-primary-500/20 transition-colors"
         >
           <RefreshCw className="w-4 h-4" />
           Evaluate Another Matter

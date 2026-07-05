@@ -16,3 +16,27 @@ export async function evaluateMatter(summary: string): Promise<EvaluateResponse>
 
   return response.json();
 }
+
+export interface UploadResult {
+  success: boolean;
+  filename: string;
+  text: string;
+  length: number;
+}
+
+export async function uploadFile(file: File): Promise<UploadResult> {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await fetch(`${API_BASE}/api/upload`, {
+    method: "POST",
+    body: formData,
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Upload failed (${response.status}): ${errorText}`);
+  }
+
+  return response.json();
+}

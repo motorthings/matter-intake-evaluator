@@ -1,12 +1,16 @@
 """API routes for the Matter Intake Evaluator."""
 
 import json
+import os
+import subprocess
+import tempfile
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, File, HTTPException, Query, UploadFile
 
 from database import (
     get_all_settings,
     get_audit_trail,
+    get_distinct_practice_areas,
     get_evaluation,
     get_setting,
     list_evaluations,
@@ -120,6 +124,60 @@ async def evaluate_matter(request: EvaluateRequest):
 
 
 # ---------------------------------------------------------------------------
+# File upload — extract text via markitdown
+# ---------------------------------------------------------------------------
+
+MAX_UPLOAD_BYTES = 20 * 1024 * 1024  # 20 MB
+
+
+@router.post("/upload")
+async def upload_file(file: UploadFile = File(...)):
+    """Accept a matter document (PDF, DOCX, etc.) and return extracted text."""
+    if not file.filename:
+        raise HTTPException(status_code=400, detail="No file provided")
+
+    # Read into memory (capped)
+    contents = await file.read()
+    if len(contents) > MAX_UPLOAD_BYTES:
+        raise HTTPException(status_code=413, detail="File too large (max 20 MB)")
+
+    suffix = os.path.splitext(file.filename)[1] or ".tmp"
+    tmp_path = None
+    try:
+        with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as tmp:
+            tmp.write(contents)
+            tmp_path = tmp.name
+
+        result = subprocess.run(
+            ["markitdown", tmp_path],
+            capture_output=True,
+            text=True,
+            timeout=60,
+        )
+        if result.returncode != 0:
+            raise HTTPException(
+                status_code=422,
+                detail=f"File extraction failed: {result.stderr.strip() or 'unknown error'}",
+            )
+
+        text = result.stdout.strip()
+        if not text:
+            raise HTTPException(status_code=422, detail="File appears to be empty or unreadable")
+
+        return {
+            "success": True,
+            "filename": file.filename,
+            "text": text,
+            "length": len(text),
+        }
+    except subprocess.TimeoutExpired:
+        raise HTTPException(status_code=422, detail="File extraction timed out")
+    finally:
+        if tmp_path and os.path.exists(tmp_path):
+            os.unlink(tmp_path)
+
+
+# ---------------------------------------------------------------------------
 # History
 # ---------------------------------------------------------------------------
 
@@ -127,12 +185,27 @@ async def evaluate_matter(request: EvaluateRequest):
 async def get_evaluations(
     limit: int = Query(default=20, le=100),
     offset: int = Query(default=0, ge=0),
+    search: str = Query(default=""),
+    risk_level: str = Query(default=""),
+    practice_area: str = Query(default=""),
+    urgency_level: str = Query(default=""),
+    sort_by: str = Query(default="created_at"),
+    sort_order: str = Query(default="desc"),
 ):
     try:
-        rows = await list_evaluations(limit=limit, offset=offset)
-        return {"success": True, "evaluations": rows, "count": len(rows)}
+        rows, total = await list_evaluations(
+            limit=limit,
+            offset=offset,
+            search=search,
+            risk_level=risk_level,
+            practice_area=practice_area,
+            urgency_level=urgency_level,
+            sort_by=sort_by,
+            sort_order=sort_order,
+        )
+        return {"success": True, "evaluations": rows, "count": len(rows), "total": total}
     except Exception as e:
-        return {"success": False, "error": str(e), "evaluations": []}
+        return {"success": False, "error": str(e), "evaluations": [], "count": 0, "total": 0}
 
 
 @router.get("/evaluations/{eval_id}")
@@ -150,6 +223,20 @@ async def get_audit(eval_id: int):
     if not trail:
         raise HTTPException(status_code=404, detail="Evaluation not found")
     return {"success": True, "audit_trail": trail}
+
+
+# ---------------------------------------------------------------------------
+# Filters / metadata
+# ---------------------------------------------------------------------------
+
+@router.get("/filters/practice-areas")
+async def get_practice_areas():
+    """Distinct practice areas seen so far — for filter dropdowns."""
+    try:
+        areas = await get_distinct_practice_areas()
+        return {"success": True, "practice_areas": areas}
+    except Exception as e:
+        return {"success": False, "error": str(e), "practice_areas": []}
 
 
 # ---------------------------------------------------------------------------

@@ -129,44 +129,44 @@ export default function SettingsPage() {
   return (
     <div>
       <header className="mb-8">
-        <h1 className="text-2xl font-bold text-[#e4e8ef] tracking-tight">
+        <h1 className="text-2xl font-bold text-[var(--text-primary)] tracking-tight">
           Settings
         </h1>
-        <p className="text-[#8c9aad] mt-1 text-sm">
+        <p className="text-[var(--text-secondary)] mt-1 text-sm">
           Configure teams, evaluation rubrics, and categories.
         </p>
       </header>
 
       <div className="space-y-6">
         {/* API Configuration */}
-        <section className="bg-[#111820] rounded-xl border border-white/6 p-6">
+        <section className="bg-[var(--bg-card)] rounded-xl border border-[var(--border-default)] p-6">
           <div className="flex items-center gap-2 mb-4">
             <Key className="w-4 h-4 text-primary-600 dark:text-primary-400" />
-            <h2 className="text-sm font-semibold text-[#e4e8ef]">
+            <h2 className="text-sm font-semibold text-[var(--text-primary)]">
               API Configuration
             </h2>
           </div>
-          <p className="text-xs text-[#8c9aad] leading-relaxed">
+          <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
             The LLM provider and model are configured via environment variables on the server.
-            Set <code className="bg-[#1a2230] px-1 rounded">LLM_API_KEY</code> for
+            Set <code className="bg-[var(--bg-secondary)] px-1 rounded">LLM_API_KEY</code> for
             DeepSeek or Anthropic (auto-detected by key prefix). Override model with{" "}
-            <code className="bg-[#1a2230] px-1 rounded">ROUTER_MODEL</code> and{" "}
-            <code className="bg-[#1a2230] px-1 rounded">EVALUATOR_MODEL</code>.
+            <code className="bg-[var(--bg-secondary)] px-1 rounded">ROUTER_MODEL</code> and{" "}
+            <code className="bg-[var(--bg-secondary)] px-1 rounded">EVALUATOR_MODEL</code>.
           </p>
         </section>
 
         {/* Teams — expandable */}
-        <section className="bg-[#111820] rounded-xl border border-white/6 overflow-hidden">
+        <section className="bg-[var(--bg-card)] rounded-xl border border-[var(--border-default)] overflow-hidden">
           <button
             onClick={() => toggleTeamsExpanded(!teamsExpanded)}
-            className="w-full flex items-center justify-between p-6 text-left hover:bg-white/[0.02] transition-colors"
+            className="w-full flex items-center justify-between p-6 text-left hover:bg-[var(--bg-hover)] transition-colors"
           >
             <div className="flex items-center gap-2">
               <Users className="w-4 h-4 text-primary-600 dark:text-primary-400" />
-              <h2 className="text-sm font-semibold text-[#e4e8ef]">
+              <h2 className="text-sm font-semibold text-[var(--text-primary)]">
                 Staffing Teams
               </h2>
-              <span className="text-xs text-[#8c9aad]">({teams.length})</span>
+              <span className="text-xs text-[var(--text-secondary)]">({teams.length})</span>
             </div>
             {teamsExpanded ? (
               <ChevronUp className="w-4 h-4 text-gray-400 flex-shrink-0" />
@@ -175,9 +175,9 @@ export default function SettingsPage() {
             )}
           </button>
           {teamsExpanded && (
-            <div className="border-t border-white/6 p-6 space-y-4">
+            <div className="border-t border-[var(--border-default)] p-6 space-y-4">
               {teams.map((team, ti) => (
-                <div key={ti} className="border border-white/6 rounded-lg p-4">
+                <div key={ti} className="border border-[var(--border-default)] rounded-lg p-4">
                   <div className="flex items-center gap-2 mb-3">
                     <input
                       value={team.name}
@@ -186,7 +186,7 @@ export default function SettingsPage() {
                         updated[ti] = { ...team, name: e.target.value };
                         setTeams(updated);
                       }}
-                      className="flex-1 px-3 py-1.5 text-sm font-medium bg-[#0d1117] border border-gray-200 dark:border-white/10 rounded-md text-[#e4e8ef]"
+                      className="flex-1 px-3 py-1.5 text-sm font-medium bg-[var(--bg-input)] border border-gray-200 dark:border-[var(--border-strong)] rounded-md text-[var(--text-primary)]"
                       placeholder="Team name"
                     />
                     <button
@@ -230,11 +230,11 @@ export default function SettingsPage() {
                         }
                       }}
                       placeholder="Add role…"
-                      className="flex-1 px-2.5 py-1 text-xs bg-[#0d1117] border border-dashed border-white/10 rounded-md text-[#e4e8ef] placeholder:text-[#5a6a7e] focus:border-white/20 transition-colors"
+                      className="flex-1 px-2.5 py-1 text-xs bg-[var(--bg-input)] border border-dashed border-[var(--border-strong)] rounded-md text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] focus:border-white/20 transition-colors"
                     />
                     <button
                       onClick={() => addRole(ti, newRoleInput[ti] || "")}
-                      className="inline-flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-md bg-white/5 text-[#8c9aad] hover:bg-white/10 hover:text-[#e4e8ef] transition-colors"
+                      className="inline-flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-md bg-[var(--bg-hover)] text-[var(--text-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)] transition-colors"
                     >
                       <Plus className="w-3 h-3" />
                       Add
@@ -247,7 +247,7 @@ export default function SettingsPage() {
               <div className="flex items-center justify-between pt-2">
                 <button
                   onClick={addTeam}
-                  className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg bg-white/5 text-[#8c9aad] hover:bg-white/10 hover:text-[#e4e8ef] transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg bg-[var(--bg-hover)] text-[var(--text-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)] transition-colors"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   Add Team
@@ -265,14 +265,14 @@ export default function SettingsPage() {
         </section>
 
         {/* Rubrics — expandable */}
-        <section className="bg-[#111820] rounded-xl border border-white/6 overflow-hidden">
+        <section className="bg-[var(--bg-card)] rounded-xl border border-[var(--border-default)] overflow-hidden">
           <button
             onClick={() => toggleRubricsExpanded(!rubricsExpanded)}
-            className="w-full flex items-center justify-between p-6 text-left hover:bg-white/[0.02] transition-colors"
+            className="w-full flex items-center justify-between p-6 text-left hover:bg-[var(--bg-hover)] transition-colors"
           >
             <div className="flex items-center gap-2">
               <BookOpen className="w-4 h-4 text-primary-600 dark:text-primary-400" />
-              <h2 className="text-sm font-semibold text-[#e4e8ef]">
+              <h2 className="text-sm font-semibold text-[var(--text-primary)]">
                 Evaluation Rubrics
               </h2>
             </div>
@@ -283,31 +283,31 @@ export default function SettingsPage() {
             )}
           </button>
           {rubricsExpanded && (
-            <div className="border-t border-white/6 p-6 space-y-4">
+            <div className="border-t border-[var(--border-default)] p-6 space-y-4">
               {/* Practice areas */}
               <div>
-                <h3 className="text-xs font-medium text-[#8c9aad] uppercase mb-2">Practice Areas</h3>
+                <h3 className="text-xs font-medium text-[var(--text-secondary)] uppercase mb-2">Practice Areas</h3>
                 <textarea
                   value={rubrics.practice_areas.join("\n")}
                   onChange={(e) => setRubrics({ ...rubrics, practice_areas: e.target.value.split("\n").filter(Boolean) })}
                   rows={6}
-                  className="w-full rounded-lg border border-gray-200 dark:border-white/10 bg-[#0d1117] px-3 py-2 text-sm text-[#e4e8ef] font-mono resize-y"
+                  className="w-full rounded-lg border border-gray-200 dark:border-[var(--border-strong)] bg-[var(--bg-input)] px-3 py-2 text-sm text-[var(--text-primary)] font-mono resize-y"
                 />
               </div>
 
               {/* Urgency criteria */}
               <div>
-                <h3 className="text-xs font-medium text-[#8c9aad] uppercase mb-2">Urgency Criteria</h3>
+                <h3 className="text-xs font-medium text-[var(--text-secondary)] uppercase mb-2">Urgency Criteria</h3>
                 {Object.entries(rubrics.urgency_criteria).map(([key, val]) => (
                   <div key={key} className="flex items-start gap-3 mb-2">
-                    <span className="text-xs font-medium text-[#e4e8ef] w-24 flex-shrink-0 pt-2">{key}</span>
+                    <span className="text-xs font-medium text-[var(--text-primary)] w-24 flex-shrink-0 pt-2">{key}</span>
                     <input
                       value={val as string}
                       onChange={(e) => setRubrics({
                         ...rubrics,
                         urgency_criteria: { ...rubrics.urgency_criteria, [key]: e.target.value },
                       })}
-                      className="flex-1 px-3 py-1.5 text-sm bg-[#0d1117] border border-gray-200 dark:border-white/10 rounded-md text-[#e4e8ef]"
+                      className="flex-1 px-3 py-1.5 text-sm bg-[var(--bg-input)] border border-gray-200 dark:border-[var(--border-strong)] rounded-md text-[var(--text-primary)]"
                     />
                   </div>
                 ))}
@@ -315,17 +315,17 @@ export default function SettingsPage() {
 
               {/* Conflict types */}
               <div>
-                <h3 className="text-xs font-medium text-[#8c9aad] uppercase mb-2">Conflict Types</h3>
+                <h3 className="text-xs font-medium text-[var(--text-secondary)] uppercase mb-2">Conflict Types</h3>
                 {Object.entries(rubrics.conflict_types).map(([key, val]) => (
                   <div key={key} className="flex items-start gap-3 mb-2">
-                    <span className="text-xs font-medium text-[#e4e8ef] w-32 flex-shrink-0 pt-2">{key}</span>
+                    <span className="text-xs font-medium text-[var(--text-primary)] w-32 flex-shrink-0 pt-2">{key}</span>
                     <input
                       value={val as string}
                       onChange={(e) => setRubrics({
                         ...rubrics,
                         conflict_types: { ...rubrics.conflict_types, [key]: e.target.value },
                       })}
-                      className="flex-1 px-3 py-1.5 text-sm bg-[#0d1117] border border-gray-200 dark:border-white/10 rounded-md text-[#e4e8ef]"
+                      className="flex-1 px-3 py-1.5 text-sm bg-[var(--bg-input)] border border-gray-200 dark:border-[var(--border-strong)] rounded-md text-[var(--text-primary)]"
                     />
                   </div>
                 ))}
@@ -333,12 +333,12 @@ export default function SettingsPage() {
 
               {/* Data integrity dimensions */}
               <div>
-                <h3 className="text-xs font-medium text-[#8c9aad] uppercase mb-2">Data Integrity Dimensions</h3>
+                <h3 className="text-xs font-medium text-[var(--text-secondary)] uppercase mb-2">Data Integrity Dimensions</h3>
                 <textarea
                   value={rubrics.data_integrity_dimensions.join("\n")}
                   onChange={(e) => setRubrics({ ...rubrics, data_integrity_dimensions: e.target.value.split("\n").filter(Boolean) })}
                   rows={4}
-                  className="w-full rounded-lg border border-gray-200 dark:border-white/10 bg-[#0d1117] px-3 py-2 text-sm text-[#e4e8ef] font-mono resize-y"
+                  className="w-full rounded-lg border border-gray-200 dark:border-[var(--border-strong)] bg-[var(--bg-input)] px-3 py-2 text-sm text-[var(--text-primary)] font-mono resize-y"
                 />
               </div>
 
