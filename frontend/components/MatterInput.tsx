@@ -62,7 +62,7 @@ export default function MatterInput({ onSubmit, disabled }: MatterInputProps) {
           onClick={() => setMode("paste")}
           className={`inline-flex items-center gap-1.5 px-3 py-2 text-sm transition-colors border-b-2 -mb-px ${
             mode === "paste"
-              ? "border-primary-500 text-primary-600 dark:text-primary-400"
+              ? "border-primary-500 text-primary-800 dark:text-primary-400"
               : "border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
           }`}
         >
@@ -73,7 +73,7 @@ export default function MatterInput({ onSubmit, disabled }: MatterInputProps) {
           onClick={() => setMode("upload")}
           className={`inline-flex items-center gap-1.5 px-3 py-2 text-sm transition-colors border-b-2 -mb-px ${
             mode === "upload"
-              ? "border-primary-500 text-primary-600 dark:text-primary-400"
+              ? "border-primary-500 text-primary-800 dark:text-primary-400"
               : "border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
           }`}
         >
@@ -161,7 +161,7 @@ Example:
             <>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <FileText className="w-4 h-4 text-primary-600 dark:text-primary-400" />
+                  <FileText className="w-4 h-4 text-primary-800 dark:text-primary-400" />
                   <span className="text-sm text-[var(--text-primary)] font-medium">{file.name}</span>
                   <span className="text-xs text-[var(--text-secondary)]">
                     ({extractedText.length.toLocaleString()} chars)

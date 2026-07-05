@@ -13,7 +13,7 @@ export default function StaffingRecommendation({ staffing }: StaffingRecommendat
       </h4>
 
       <div className="flex items-center gap-2 mb-3">
-        <Users className="w-4 h-4 text-primary-600 dark:text-primary-400" />
+        <Users className="w-4 h-4 text-primary-800 dark:text-primary-400" />
         <span className="text-base font-semibold text-[var(--text-primary)]">
           {staffing.recommended_role}
         </span>

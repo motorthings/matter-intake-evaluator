@@ -141,7 +141,7 @@ export default function SettingsPage() {
         {/* API Configuration */}
         <section className="bg-[var(--bg-card)] rounded-xl border border-[var(--border-default)] p-6">
           <div className="flex items-center gap-2 mb-4">
-            <Key className="w-4 h-4 text-primary-600 dark:text-primary-400" />
+            <Key className="w-4 h-4 text-primary-800 dark:text-primary-400" />
             <h2 className="text-sm font-semibold text-[var(--text-primary)]">
               API Configuration
             </h2>
@@ -162,7 +162,7 @@ export default function SettingsPage() {
             className="w-full flex items-center justify-between p-6 text-left hover:bg-[var(--bg-hover)] transition-colors"
           >
             <div className="flex items-center gap-2">
-              <Users className="w-4 h-4 text-primary-600 dark:text-primary-400" />
+              <Users className="w-4 h-4 text-primary-800 dark:text-primary-400" />
               <h2 className="text-sm font-semibold text-[var(--text-primary)]">
                 Staffing Teams
               </h2>
@@ -271,7 +271,7 @@ export default function SettingsPage() {
             className="w-full flex items-center justify-between p-6 text-left hover:bg-[var(--bg-hover)] transition-colors"
           >
             <div className="flex items-center gap-2">
-              <BookOpen className="w-4 h-4 text-primary-600 dark:text-primary-400" />
+              <BookOpen className="w-4 h-4 text-primary-800 dark:text-primary-400" />
               <h2 className="text-sm font-semibold text-[var(--text-primary)]">
                 Evaluation Rubrics
               </h2>

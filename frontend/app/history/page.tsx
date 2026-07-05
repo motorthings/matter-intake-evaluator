@@ -193,7 +193,7 @@ export default function HistoryPage() {
             onClick={() => setShowFilters(!showFilters)}
             className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border text-sm transition-colors ${
               showFilters
-                ? "bg-primary-950/30 border-primary-700 text-primary-700 dark:text-primary-400"
+                ? "bg-primary-950/30 border-primary-700 text-[var(--text-primary)] dark:text-primary-400"
                 : "border-[var(--border-default)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border-strong)]"
             }`}
           >
@@ -233,7 +233,7 @@ export default function HistoryPage() {
               }}
               className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs transition-colors ${
                 sortBy === field
-                  ? "bg-primary-950/30 text-primary-600 dark:text-primary-400 border border-primary-700"
+                  ? "bg-primary-950/30 text-[var(--text-primary)] dark:text-primary-400 border border-primary-700"
                   : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-transparent"
               }`}
             >
@@ -246,7 +246,7 @@ export default function HistoryPage() {
           {hasActiveFilters && (
             <button
               onClick={resetFilters}
-              className="text-xs text-primary-600 hover:text-primary-600 dark:text-primary-400 transition-colors ml-auto"
+              className="text-xs font-medium text-primary-700 hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-300 transition-colors ml-auto"
             >
               Reset all
             </button>
@@ -362,7 +362,7 @@ export default function HistoryPage() {
                       <td className="px-6 py-3">
                         <button
                           onClick={() => openAudit(ev.id)}
-                          className="inline-flex items-center gap-1 text-xs font-medium text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
+                          className="inline-flex items-center gap-1 text-xs font-medium text-primary-800 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
                         >
                           <FileSearch className="w-3.5 h-3.5" />
                           Audit
